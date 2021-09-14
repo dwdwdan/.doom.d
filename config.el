@@ -80,6 +80,8 @@
   (setq visual-fill-column-width 125)
   (setq visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
+
+(advice-add `org-refile :after `org-save-all-org-buffers)
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
