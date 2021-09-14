@@ -73,6 +73,13 @@
 
 (add-hook! org-mode dan/org-setup)
 
+(use-package! visual-fill-column
+  :hook (org-mode . dan/org-visual-fill))
+
+(defun dan/org-visual-fill ()
+  (setq visual-fill-column-width 125)
+  (setq visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
