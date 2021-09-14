@@ -83,6 +83,10 @@
   (visual-fill-column-mode 1))
 
 (advice-add `org-refile :after `org-save-all-org-buffers)
+
+(setq browse-url-mailto-function 'browse-url-generic)
+(setq browse-url-generic-program "thunderbird")
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
