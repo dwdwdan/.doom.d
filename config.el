@@ -50,7 +50,9 @@
                         (org-level-8 . 1.05)))
         (set-face-attribute (car face) nil :weight `bold :height (cdr face)))
 
-        (setq org-todo-keywords `((sequence "TODO(t)" "IN PROGRESS(p)" "WAITING(w)" "|" "DONE(d!)" "CANCELLED(c!)"))))
+        (setq org-todo-keywords `((sequence "TODO(t)" "IN PROGRESS(p)" "WAITING(w)" "|" "DONE(d!)" "CANCELLED(c!)")))
+        (setq org-refile-targets `((,(concat org-directory "/archive.org") :maxlevel . 1)
+                                   (,(concat org-directory "/todo.org") :maxlevel . 1))))
 
 (setq +latex-viewers `(pdf-tools))
 
