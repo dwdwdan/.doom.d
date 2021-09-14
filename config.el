@@ -36,7 +36,8 @@
 
 (setq org-directory (concat dropbox-dir "/Org")
       org-roam-directory (concat dropbox-dir "/OrgRoam")
-      org-ellipsis " ▼")
+      org-ellipsis " ▼"
+      org-superstar-headline-bullets-list `("◉" "○"))
 
 (after! org
         (dolist (face `((org-level-1 . 1.5)
