@@ -32,9 +32,6 @@
 (setq doom-font (font-spec :family "Jetbrains Mono" :size 20)
       doom-variable-pitch-font (font-spec :family "Cantarell" :size 20))
 
-(set-fontset-font t 'symbol "Apple Color Emoji" nil 'prepend)
-(set-fontset-font t 'symbol "Noto Color Emoji" nil 'prepend)
-(set-fontset-font t 'symbol "Segoe UI Emoji" nil 'prepend)
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
