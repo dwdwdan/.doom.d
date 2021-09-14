@@ -49,6 +49,14 @@
                         (org-level-7 . 1.1)
                         (org-level-8 . 1.05)))
         (set-face-attribute (car face) nil :weight `bold :height (cdr face)))
+        (set-face-attribute `org-document-title nil :height 300)
+        (set-face-attribute `org-block nil :foreground nil :background "#353848" :inherit `fixed-pitch)
+        (set-face-attribute `org-code nil :inherit `(shadow fixed-pitch))
+        (set-face-attribute `org-table nil :background "#353848" :inherit `(shadow fixed-pitch))
+        (set-face-attribute `org-verbatim nil :inherit `(shadow fixed-pitch))
+        (set-face-attribute `org-special-keyword nil :inherit `(font-lock-comment-face fixed-pitch))
+        (set-face-attribute `org-meta-line nil :inherit `(font-lock-comment-face fixed-pitch))
+        (set-face-attribute `org-checkbox nil :inherit `fixed-pitch)
 
         (setq org-todo-keywords `((sequence "TODO(t)" "IN PROGRESS(p)" "WAITING(w)" "|" "DONE(d!)" "CANCELLED(c!)")))
         (setq org-refile-targets `((,(concat org-directory "/archive.org") :maxlevel . 1)
@@ -58,6 +66,12 @@
 
 (setq display-line-numbers-type `relative)
 
+(defun dan/org-setup ()
+  (variable-pitch-mode 1)
+  (org-indent-mode)
+  (display-line-numbers-mode 0))
+
+(add-hook! org-mode dan/org-setup)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
