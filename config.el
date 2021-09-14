@@ -47,6 +47,16 @@
       org-roam-directory (concat dropbox-dir "/OrgRoam")
       org-ellipsis " ▼")
 
+(after! org
+        (dolist (face `((org-level-1 . 1.5)
+                        (org-level-2 . 1.4)
+                        (org-level-3 . 1.3)
+                        (org-level-4 . 1.2)
+                        (org-level-5 . 1.1)
+                        (org-level-6 . 1.1)
+                        (org-level-7 . 1.1)
+                        (org-level-8 . 1.05)))
+        (set-face-attribute (car face) nil :weight `bold :height (cdr face))))
 
 (setq +latex-viewers `(pdf-tools))
 
