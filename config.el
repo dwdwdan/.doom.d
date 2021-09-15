@@ -85,7 +85,7 @@
 (advice-add `org-refile :after `org-save-all-org-buffers)
 
 (setq browse-url-mailto-function 'browse-url-generic)
-(setq browse-url-generic-program "thunderbird")
+(setq browse-url-generic-program "evolution")
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
