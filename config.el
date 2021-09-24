@@ -32,28 +32,60 @@
 (setq doom-font (font-spec :family "Jetbrains Mono" :size 20)
       doom-variable-pitch-font (font-spec :family "Cantarell" :size 20))
 
-(set-fontset-font t 'symbol "Apple Color Emoji" nil 'prepend)
-(set-fontset-font t 'symbol "Noto Color Emoji" nil 'prepend)
-(set-fontset-font t 'symbol "Segoe UI Emoji" nil 'prepend)
-
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-dracula)
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
 (setq org-directory (concat dropbox-dir "/Org")
       org-roam-directory (concat dropbox-dir "/OrgRoam")
-      org-ellipsis " ▼")
+      org-ellipsis " ▼"
+      org-superstar-headline-bullets-list `("◉" "○"))
 
+(after! org
+        (dolist (face `((org-level-1 . 1.5)
+                        (org-level-2 . 1.4)
+                        (org-level-3 . 1.3)
+                        (org-level-4 . 1.2)
+                        (org-level-5 . 1.1)
+                        (org-level-6 . 1.1)
+                        (org-level-7 . 1.1)
+                        (org-level-8 . 1.05)))
+        (set-face-attribute (car face) nil :weight `bold :height (cdr face)))
+        (set-face-attribute `org-document-title nil :height 300)
+        (set-face-attribute `org-block nil :foreground nil :background "#353848" :inherit `fixed-pitch)
+        (set-face-attribute `org-code nil :inherit `(shadow fixed-pitch))
+        (set-face-attribute `org-table nil :background "#353848" :inherit `(shadow fixed-pitch))
+        (set-face-attribute `org-verbatim nil :inherit `(shadow fixed-pitch))
+        (set-face-attribute `org-special-keyword nil :inherit `(font-lock-comment-face fixed-pitch))
+        (set-face-attribute `org-meta-line nil :inherit `(font-lock-comment-face fixed-pitch))
+        (set-face-attribute `org-checkbox nil :inherit `fixed-pitch)
+
+        (setq org-todo-keywords `((sequence "TODO(t)" "IN PROGRESS(p)" "WAITING(w)" "|" "DONE(d!)" "CANCELLED(c!)")))
+        (setq org-refile-targets `((,(concat org-directory "/archive.org") :maxlevel . 1)
+                                   (,(concat org-directory "/todo.org") :maxlevel . 1)))
+        (setq org-capture-templates `(("t" "Todo" entry (file ,(concat org-directory "/inbox.org")) "* TODO %?\n %U\n %a\n %i" :empty-lines 1))))
 
 (setq +latex-viewers `(pdf-tools))
 
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type `relative)
 
+(defun dan/org-setup ()
+  (variable-pitch-mode 1)
+  (org-indent-mode)
+  (display-line-numbers-mode 0))
+
+(add-hook! org-mode dan/org-setup)
+
+(use-package! visual-fill-column
+  :hook (org-mode . dan/org-visual-fill))
+
+(defun dan/org-visual-fill ()
+  (setq visual-fill-column-width 125)
+  (setq visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
+
+(advice-add `org-refile :after `org-save-all-org-buffers)
+
+(setq browse-url-mailto-function 'browse-url-generic)
+(setq browse-url-generic-program "evolution")
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
