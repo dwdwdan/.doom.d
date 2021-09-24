@@ -3,7 +3,7 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 (cond ((eq system-type 'windows-nt)
-       (setq dropbox-dir "C://Users/Daniel/Dropbox")
+       (setq dropbox-dir "C:/Users/Daniel Walters/Dropbox")
        ;; Windows-specific code goes here.
        )
       ((eq system-type 'gnu/linux)
