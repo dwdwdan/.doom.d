@@ -40,7 +40,8 @@
       org-superstar-headline-bullets-list `("◉" "○")
       org-agenda-span 7
       org-agenda-start-on-weekday 1
-      org-agenda-start-day "+0d")
+      org-agenda-start-day "+0d"
+      org-log-into-drawer t)
 
 (after! org
         (dolist (face `((org-level-1 . 1.5)
