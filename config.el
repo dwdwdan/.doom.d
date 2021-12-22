@@ -76,7 +76,7 @@
   (org-indent-mode)
   (display-line-numbers-mode 0))
 
-(add-hook! org-mode dan/org-setup)
+(add-hook! org-mode `dan/org-setup)
 
 (use-package! visual-fill-column
   :hook (org-mode . dan/org-visual-fill))
