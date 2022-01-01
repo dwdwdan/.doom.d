@@ -3,11 +3,11 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 (cond ((eq system-type 'windows-nt)
-       (setq dropbox-dir "C:/Users/Daniel Walters/Dropbox")
+       (setq sync-dir "C:/Users/Daniel Walters/Dropbox")
        ;; Windows-specific code goes here.
        )
       ((eq system-type 'gnu/linux)
-       (setq dropbox-dir "~/Dropbox")
+       (setq sync-dir "~/Nextcloud")
        ;; Linux-specific code goes here.
        ))
 
@@ -34,8 +34,8 @@
 
 (setq doom-theme 'doom-dracula)
 
-(setq org-directory (concat dropbox-dir "/Org")
-      org-roam-directory (concat dropbox-dir "/OrgRoam")
+(setq org-directory (concat sync-dir "/Org")
+      org-roam-directory (concat sync-dir "/OrgRoam")
       org-ellipsis " ▼"
       org-superstar-headline-bullets-list `("◉" "○")
       org-agenda-span 7
