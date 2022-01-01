@@ -30,7 +30,7 @@
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 ;;
 (setq doom-font (font-spec :family "Jetbrains Mono" :size 20)
-      doom-variable-pitch-font (font-spec :family "Cantarell" :size 20))
+      doom-variable-pitch-font (font-spec :family "Arial" :size 20))
 
 (setq doom-theme 'doom-dracula)
 
