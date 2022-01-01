@@ -64,7 +64,7 @@
         (set-face-attribute `org-checkbox nil :inherit `fixed-pitch)
 
         (setq org-todo-keywords `((sequence "TODO(t)" "IN PROGRESS(p)" "WAITING(w)" "|" "DONE(d!)" "CANCELLED(c!)")))
-        (setq org-refile-targets `((,(concat org-directory "/archive.org") :maxlevel . 1)
+        (setq org-refile-targets `((,(concat org-directory "/archive.org") :maxlevel . 2)
                                    (,(concat org-directory "/todo.org") :maxlevel . 1)))
         (setq org-capture-templates `(("t" "Todo" entry (file ,(concat org-directory "/inbox.org")) "* TODO %?\n %U\n %a\n %i" :empty-lines 1))))
 
