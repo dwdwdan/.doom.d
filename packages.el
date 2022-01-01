@@ -50,3 +50,5 @@
 ;(unpin! t)
 
 (package! visual-fill-column)
+
+(package! org-fragtog)

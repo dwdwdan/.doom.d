@@ -41,7 +41,8 @@
       org-agenda-span 7
       org-agenda-start-on-weekday 1
       org-agenda-start-day "+0d"
-      org-log-into-drawer t)
+      org-log-into-drawer t
+      org-startup-with-latex-preview t)
 
 (after! org
         (dolist (face `((org-level-1 . 1.5)
@@ -74,7 +75,8 @@
 (defun dan/org-setup ()
   (variable-pitch-mode 1)
   (org-indent-mode)
-  (display-line-numbers-mode 0))
+  (display-line-numbers-mode 0)
+  (org-fragtog-mode))
 
 (add-hook! org-mode (dan/org-setup))
 
