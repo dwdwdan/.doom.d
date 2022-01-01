@@ -1,3 +1,9 @@
+#+title:Doom Emacs Config
+#+property: header-args :tangle config.el
+
+* Get system Info
+I need to set sync directories for org files, but it changes depending on the OS. I haven't yet changed my windows sync yet, hence it's still dropbox
+#+begin_src emacs-lisp
 (cond ((eq system-type 'windows-nt)
        (setq sync-dir "C:/Users/Daniel Walters/Dropbox")
        ;; Windows-specific code goes here.
@@ -6,17 +12,27 @@
        (setq sync-dir "~/Nextcloud")
        ;; Linux-specific code goes here.
        ))
+#+end_src
 
+* Name and email
+#+begin_src emacs-lisp
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "Dan Walters"
       user-mail-address "dan.walters5@outlook.com")
+#+end_src
 
+* Font and theme
+I use jetbrains mono for my monospace font. At the moment I'm using Arial for variable pitch but I might change this at some point.
+#+begin_src emacs-lisp
 (setq doom-font (font-spec :family "Jetbrains Mono" :size 20)
       doom-variable-pitch-font (font-spec :family "Arial" :size 20))
 
 (setq doom-theme 'doom-dracula)
+#+end_src
 
+* Org
+#+begin_src emacs-lisp
 (setq org-directory (concat sync-dir "/Org")
       org-roam-directory (concat sync-dir "/OrgRoam")
       org-ellipsis " ▼"
@@ -28,7 +44,12 @@
       org-startup-with-latex-preview t)
 
 (advice-add `org-refile :after `org-save-all-org-buffers)
+#+end_src
 
+** Fonts
+*** Header Size
+I like my headers to be larger than my body text in org files.
+#+begin_src emacs-lisp
 (after! org
         (dolist (face `((org-level-1 . 1.5)
                         (org-level-2 . 1.4)
@@ -39,7 +60,10 @@
                         (org-level-7 . 1.1)
                         (org-level-8 . 1.05)))
         (set-face-attribute (car face) nil :weight `bold :height (cdr face))))
-
+#+end_src
+*** Fixed pitch
+I use variable pitch mode (set in [[Other visuals]]) in org mode, but I need to use fixed pitch for certain things, such as tables and source blocks. I also want a different background colour on source blocks.
+#+begin_src emacs-lisp
 (after! org
         (set-face-attribute `org-document-title nil :height 300)
         (set-face-attribute `org-block nil :foreground nil :background "#353848" :inherit `fixed-pitch)
@@ -49,13 +73,19 @@
         (set-face-attribute `org-special-keyword nil :inherit `(font-lock-comment-face fixed-pitch))
         (set-face-attribute `org-meta-line nil :inherit `(font-lock-comment-face fixed-pitch))
         (set-face-attribute `org-checkbox nil :inherit `fixed-pitch))
-
+#+end_src
+** TODOs
+Sets my org todo configuration
+#+begin_src emacs-lisp
 (after! org
         (setq org-todo-keywords `((sequence "TODO(t)" "IN PROGRESS(p)" "WAITING(w)" "|" "DONE(d!)" "CANCELLED(c!)")))
         (setq org-refile-targets `((,(concat org-directory "/archive.org") :maxlevel . 2)
                                    (,(concat org-directory "/todo.org") :maxlevel . 1)))
         (setq org-capture-templates `(("t" "Todo" entry (file ,(concat org-directory "/inbox.org")) "* TODO %?\n %U\n %a\n %i" :empty-lines 1))))
-
+#+end_src
+** Other visuals
+Configures variable pitch mode
+#+begin_src emacs-lisp
 (defun dan/org-setup ()
   (variable-pitch-mode 1)
   (org-indent-mode)
@@ -63,7 +93,10 @@
   (org-fragtog-mode))
 
 (add-hook! org-mode (dan/org-setup))
-
+#+end_src
+*** Visual Fill Column
+I only want to use the middle 125 characters of the screen in org mode. I think this gives more focus
+#+begin_src emacs-lisp
 (use-package! visual-fill-column
   :hook (org-mode . dan/org-visual-fill))
 
@@ -72,8 +105,26 @@
   (setq visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
 
+#+end_src
+* Mailto Links
+I use evolution (from GNOME) as my mail client.
+#+begin_src emacs-lisp
 (setq browse-url-mailto-function 'browse-url-generic)
 (setq browse-url-generic-program "evolution")
+#+end_src
 
+* Other stuff
+Other random things
+#+begin_src emacs-lisp
 (setq display-line-numbers-type `relative)
 (setq +latex-viewers `(pdf-tools))
+#+end_src
+
+* Config Notes
+This is lifted from the default config file for future reference
+
+- ~load!~ for loading external *.el files relative to this one
+- ~use-package!~ for configuring packages
+- ~after!~ for running code after a package has loaded
+- ~add-load-path!~ for adding directories to the ~load-path~, relative to this file. Emacs searches the ~load-path~ when you load packages with ~require~ or ~use-package~.
+- ~map!~ for binding new keys
