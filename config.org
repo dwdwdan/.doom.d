@@ -31,7 +31,7 @@ I use jetbrains mono for my monospace font. At the moment I'm using Arial for va
 (setq doom-theme 'doom-one)
 #+end_src
 
-* Org
+* Org Mode
 #+begin_src emacs-lisp
 (setq org-directory (concat sync-dir "/Org")
       org-roam-directory (concat sync-dir "/OrgRoam")
