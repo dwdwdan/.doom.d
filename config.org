@@ -28,7 +28,7 @@ I use jetbrains mono for my monospace font. At the moment I'm using Arial for va
 (setq doom-font (font-spec :family "Jetbrains Mono" :size 20)
       doom-variable-pitch-font (font-spec :family "Arial" :size 20))
 
-(setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-one)
 #+end_src
 
 * Org
