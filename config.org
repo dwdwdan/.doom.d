@@ -106,6 +106,46 @@ I only want to use the middle 125 characters of the screen in org mode. I think 
   (visual-fill-column-mode 1))
 
 #+end_src
+* Ledger Mode
+Ledger Mode is used with the [[https:www.ledger-cli.org][ledger cli]] to manage finances in a plain text file.
+#+begin_src emacs-lisp
+(defun dan/ledgerCommand (command)
+  "Runs ledger on the current file. command gives the specific query"
+    (concat "ledger -f " (buffer-file-name) " " command))
+#+end_src
+
+** Mappings
+Define mappings to easily see the information wanted
+#+begin_src emacs-lisp
+(map! :after ledger-mode
+      :map ledger-mode-map
+      :localleader
+      :desc "Asset Balance"
+      :n "b" (lambda() (interactive) (shell-command (dan/ledgerCommand "bal Assets"))))
+#+end_src
+
+** Capture Templates
+We use org capture templates to easily create new incomes and expenses from anywhere
+#+begin_src emacs-lisp
+(after! org-capture
+  (add-to-list `org-capture-templates
+               '("l" "Ledger"))
+  (add-to-list `org-capture-templates
+      '("le" "Expense" plain
+            (file "~/Nextcloud/Ledger/main.ledger")
+            "%(org-read-date) %^{Label}
+Expenses:%^{Expenses Account}  £%^{Amount}
+Assets:Main
+"))
+  (add-to-list `org-capture-templates
+      '("li" "Income" plain
+            (file "~/Nextcloud/Ledger/main.ledger")
+            "%(org-read-date) %^{Payer}
+Assets:Main  £%^{Amount}
+Income:%^{Income Account}
+")))
+#+end_src
+
 * Mailto Links
 I use evolution (from GNOME) as my mail client.
 #+begin_src emacs-lisp
