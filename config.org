@@ -127,22 +127,24 @@ Define mappings to easily see the information wanted
 ** Capture Templates
 We use org capture templates to easily create new incomes and expenses from anywhere
 #+begin_src emacs-lisp
-(after! org-capture
+(after! org
   (add-to-list `org-capture-templates
                '("l" "Ledger"))
   (add-to-list `org-capture-templates
       '("le" "Expense" plain
             (file "~/Nextcloud/Ledger/main.ledger")
-            "%(org-read-date) %^{Label}
-Expenses:%^{Expenses Account}  £%^{Amount}
-Assets:Main
+            "
+%(org-read-date) %^{Label}
+    Expenses:%^{Expenses Account}  £%^{Amount}
+    Assets:Main
 "))
   (add-to-list `org-capture-templates
       '("li" "Income" plain
             (file "~/Nextcloud/Ledger/main.ledger")
-            "%(org-read-date) %^{Payer}
-Assets:Main  £%^{Amount}
-Income:%^{Income Account}
+            "
+%(org-read-date) %^{Payer}
+    Assets:Main  £%^{Amount}
+    Income:%^{Income Account}
 ")))
 #+end_src
 
