@@ -148,6 +148,19 @@ We use org capture templates to easily create new incomes and expenses from anyw
 ")))
 #+end_src
 
+* Latex Mode
+Emacs is picky on capitalisation for mappings for latex, it has to use ~LaTeX~ rather than ~latex~ for some reason (thanks to Tony_ and rigor on the doom discord for helping me sort that out)
+#+begin_src emacs-lisp
+(map! :after tex-mode
+      :map LaTeX-mode-map
+      :localleader
+      :desc "Compile Document"
+      :n "a" (cmd! (shell-command (concat "latexmk -pdf " (buffer-file-name)))))
+
+(setq +latex-viewers `(pdf-tools))
+#+end_src
+** TODO Override Compile Command
+Additionally I need to work out why the desc isn't applying
 * Mailto Links
 I use evolution (from GNOME) as my mail client.
 #+begin_src emacs-lisp
@@ -159,7 +172,6 @@ I use evolution (from GNOME) as my mail client.
 Other random things
 #+begin_src emacs-lisp
 (setq display-line-numbers-type `relative)
-(setq +latex-viewers `(pdf-tools))
 #+end_src
 
 * Config Notes
