@@ -121,7 +121,7 @@ Define mappings to easily see the information wanted
       :map ledger-mode-map
       :localleader
       :desc "Asset Balance"
-      :n "b" (lambda() (interactive) (shell-command (dan/ledgerCommand "bal Assets"))))
+      :n "b" (cmd! (shell-command (dan/ledgerCommand "bal Assets"))))
 #+end_src
 
 ** Capture Templates
